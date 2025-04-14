@@ -1,0 +1,443 @@
+<html>
+<head>
+  <title>Retro Mega Search 3.0</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Retro Styles */
+    .retro-bg {
+      background: #c0c0c0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAKrVq36zwjjgzhhYWGMYAEYB8RmROaABADeOQ8CXl/xfgAAAABJRU5ErkJggg==');
+      font-family: 'MS Sans Serif', sans-serif;
+    }
+    .result-card {
+      background: #ffffff;
+      border: 3px outset #808080;
+      margin: 8px;
+      padding: 12px;
+    }
+    .window-title {
+      background: #000080;
+      color: white;
+      padding: 3px;
+      font-weight: bold;
+    }
+    .crt::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+    }
+    .modal-content {
+      background: #f8f9fa;
+      border: 3px outset #808080;
+      padding: 20px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .footer-link {
+      color: #0000FF;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    
+    /* Facebook Profile Card */
+    .facebook-profile-card {
+      margin: 20px auto 20px 20px;
+      width: 200px;
+      background: #fff;
+      border: 1px solid #d3d6e0;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    .fb-profile-header {
+      background: #3b5998;
+      padding: 10px;
+      border-radius: 3px 3px 0 0;
+    }
+    .fb-profile-name {
+      color: #fff;
+      font-weight: bold;
+      font-size: 13px;
+      text-align: center;
+    }
+    .fb-profile-body {
+      padding: 15px 10px 10px 10px;
+    }
+    .fb-profile-img {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #fff;
+      margin: -15px auto 5px auto;
+      display: block;
+    }
+    .fb-profile-stats {
+      margin-top: 15px;
+      border-top: 1px solid #e9ebee;
+      padding-top: 10px;
+      text-align: center;
+    }
+    .fb-stat-item {
+      color: #3b5998;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+    .fb-blue-link {
+      color: #3b5998;
+      font-size: 11px;
+      text-decoration: none;
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* Wikipedia Article Styles */
+    .wiki-article {
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #202122;
+      font-size: 0.875rem;
+    }
+    .wiki-main-heading {
+      font-size: 1.8em;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 0.25em;
+      margin: 1em 0 0.5em 0;
+    }
+    .wiki-heading {
+      font-size: 1.5em;
+      margin: 1em 0 0.5em 0;
+    }
+    .wiki-paragraph {
+      margin: 0.5em 0;
+      text-align: justify;
+    }
+    .wiki-list {
+      margin: 0.5em 0 0.5em 1.5em;
+    }
+    .wiki-list li {
+      margin: 0.3em 0;
+    }
+    .wiki-infobox {
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      padding: 0.5em;
+      float: right;
+      margin: 0 0 1em 1em;
+      max-width: 300px;
+    }
+    .wiki-quote {
+      background: #f8f9fa;
+      border-left: 4px solid #a2a9b1;
+      padding: 0.5em 1em;
+      margin: 1em 0;
+      font-style: italic;
+    }
+    .wiki-reference {
+      font-size: 0.75rem;
+      color: #54595d;
+      margin-top: 1em;
+    }
+    .wiki-image {
+      max-width: 100%;
+      height: auto;
+      margin: 1em 0;
+    }
+  </style>
+</head>
+<body class="retro-bg crt">
+  <!-- Header -->
+  <div class="window-title p-2">
+    <marquee behavior="alternate">~~~ INFOSEARCH 98 ~~~ ACCESS THE WORLD'S KNOWLEDGE ~~~</marquee>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="facebook-profile-card">
+    <div class="fb-profile-header">
+      <div class="fb-profile-name">JEFFvsc</div>
+    </div>
+    <div class="fb-profile-body">
+      <img src="https://img.icons8.com/plasticine/100/000000/student-male.png" 
+           class="fb-profile-img" alt="Profile">
+      <div class="fb-profile-stats">
+        <div class="fb-stat-item">🔍 Active Developer</div>
+        <div class="fb-stat-item">📚 Search Master</div>
+        <div class="fb-stat-item">⚡ Version 3.0</div>
+        <a href="https://jeffvscblogs.github.io/home/about.html" class="fb-blue-link">View Profile →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto p-4">
+    <div class="result-card">
+      <div class="flex gap-2 mb-4">
+        <input type="text" id="searchInput" class="flex-1 p-1 border-2 border-black" 
+               placeholder="Enter search terms..." autocomplete="off"
+               onkeypress="handleEnter(event)">
+        <button onclick="startSearch()" id="searchBtn" class="bg-blue-800 text-white px-4 py-1 border-2 border-black">
+          <img src="https://i.imgur.com/zgIy8sY.gif" class="inline mr-2" width="16"> GO
+        </button>
+      </div>
+      <div id="results" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      <div id="loading" class="hidden text-center py-4">
+        <img src="https://i.gifer.com/ZZ5H.gif" width="50" class="inline">
+        <span class="ml-2">Querying knowledge banks...</span>
+      </div>
+      <div id="error" class="hidden text-red-600 text-center"></div>
+    </div>
+  </div>
+
+  <!-- Article Modal -->
+  <div id="articleModal" class="fixed inset-0 hidden items-center justify-center p-4 bg-black bg-opacity-50">
+    <div class="modal-content" style="width: 90%; max-width: 800px">
+      <div class="flex justify-between mb-4">
+        <h2 id="modalTitle" class="text-xl font-bold"></h2>
+        <button onclick="closeModal()" class="bg-red-600 text-white px-2 py-1 border-2 border-black">
+          ✕ Close
+        </button>
+      </div>
+      <div id="modalBody" class="wiki-article"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="fixed bottom-0 w-full bg-gray-300 p-1 border-t-2 border-gray-400">
+    <div class="flex justify-between text-sm px-2 items-center">
+      <div class="flex gap-4">
+        <span>📚 Results: <span id="resultCount">0</span></span>
+        <span class="footer-link" onclick="window.scrollTo(0,0)">↑ Top</span>
+        <span class="footer-link" onclick="document.getElementById('searchInput').focus()">🔍 New Search</span>
+      </div>
+      <div class="flex gap-4">
+        <span>📅 <span id="currentDate"></span></span>
+        <span>🕒 <span id="currentTime"></span></span>
+        <span>📡 Status: Online</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // Enter Key Handler
+  function handleEnter(event) {
+      if (event.key === 'Enter') {
+          startSearch();
+      }
+  }
+
+  // Search Configuration
+  const API_CONFIG = [
+    { 
+      name: 'wikipedia',
+      url: query => `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=30&prop=extracts|pageimages&exintro&explaintext&format=json&origin=*`,
+      parser: data => Object.values(data.query?.pages || {}).map(item => ({
+        type: 'wiki',
+        id: item.pageid,
+        title: item.title,
+        content: item.extract,
+        image: item.thumbnail?.source
+      }))
+    },
+    {
+      name: 'openlibrary',
+      url: query => `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=30`,
+      parser: data => data.docs?.map(book => ({
+        type: 'book',
+        id: book.key,
+        title: book.title,
+        author: book.author_name?.[0],
+        year: book.first_publish_year
+      })) || []
+    }
+  ];
+
+  let searchController = null;
+  let isSearching = false;
+
+  function updateDateTime() {
+    document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+    document.getElementById('currentTime').textContent = new Date().toLocaleTimeString();
+  }
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+
+  async function startSearch() {
+    if (isSearching) return;
+    
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query) return;
+
+    isSearching = true;
+    document.getElementById('results').innerHTML = '';
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('error').classList.add('hidden');
+    document.getElementById('searchBtn').disabled = true;
+    
+    if (searchController) searchController.abort();
+    searchController = new AbortController();
+
+    try {
+      const apiPromises = API_CONFIG.map(api => 
+        fetch(api.url(query), { signal: searchController.signal })
+          .then(response => {
+            if (!response.ok) throw new Error(`${api.name} response error`);
+            return response.json();
+          })
+          .then(data => addResults(api.parser(data)))
+          .catch(error => {
+            if (error.name !== 'AbortError') {
+              console.warn(`${api.name} failed:`, error.message);
+            }
+          })
+      );
+
+      await Promise.all(apiPromises);
+    } finally {
+      isSearching = false;
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('searchBtn').disabled = false;
+      searchController = null;
+    }
+  }
+
+  function addResults(results) {
+    const container = document.getElementById('results');
+    
+    results.forEach(result => {
+      const card = document.createElement('div');
+      card.className = 'result-card';
+      
+      const content = {
+        wiki: () => `
+          <div class="flex flex-col justify-between h-full">
+            <div class="flex gap-3">
+              ${result.image ? `<img src="${result.image}" class="w-16 h-16" loading="lazy">` : ''}
+              <div>
+                <h3 class="text-lg font-bold">📚 ${result.title}</h3>
+                <p class="text-sm">${result.content?.substring(0, 150) || 'No summary available'}...</p>
+              </div>
+            </div>
+            <button onclick="showFullArticle('wiki', '${result.id}')" 
+                    class="mt-2 self-end bg-green-800 text-yellow-300 px-2 py-1 text-xs border-2 border-black">
+              📖 Read Full Article
+            </button>
+          </div>
+        `,
+        book: () => `
+          <div class="flex flex-col justify-between h-full">
+            <div>
+              <h3 class="text-lg font-bold">📖 ${result.title}</h3>
+              <p class="text-sm">${result.author || 'Unknown'} - ${result.year || 'Unknown year'}</p>
+            </div>
+            <button onclick="showFullArticle('book', '${result.id}')" 
+                    class="mt-2 self-end bg-blue-800 text-white px-2 py-1 text-xs border-2 border-black">
+              📘 View Details
+            </button>
+          </div>
+        `
+      }[result.type]();
+
+      card.innerHTML = content;
+      container.appendChild(card);
+    });
+
+    document.getElementById('resultCount').textContent = container.children.length;
+  }
+
+  async function showFullArticle(type, id) {
+    try {
+      let content = '';
+      let title = '';
+      
+      switch(type) {
+        case 'wiki':
+          const wikiRes = await fetch(
+            `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&pageids=${id}&explaintext&format=json&origin=*`
+          );
+          const wikiData = await wikiRes.json();
+          title = wikiData.query.pages[id].title;
+          content = formatWikipediaArticle(wikiData.query.pages[id].extract);
+          break;
+          
+        case 'book':
+          const bookRes = await fetch(`https://openlibrary.org${id}.json`);
+          const bookData = await bookRes.json();
+          title = bookData.title || 'Book Details';
+          content = `
+            <div class="wiki-article">
+              <h1 class="wiki-main-heading">${title}</h1>
+              ${bookData.description?.value || bookData.description || '<p>No detailed description available</p>'}
+              ${bookData.covers ? `<img src="https://covers.openlibrary.org/b/id/${bookData.covers[0]}-L.jpg" class="wiki-infobox">` : ''}
+              <div class="wiki-content">
+                ${formatBookDetails(bookData)}
+              </div>
+            </div>
+          `;
+          break;
+      }
+
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').innerHTML = content;
+      document.getElementById('articleModal').classList.remove('hidden');
+    } catch (error) {
+      showError('Could not load full article');
+    }
+  }
+
+  function formatWikipediaArticle(text) {
+    const sections = text.split('\n');
+    let html = '<div class="wiki-article">';
+    
+    sections.forEach(section => {
+      if (section.startsWith('===')) {
+        const heading = section.replace(/=/g, '').trim();
+        html += `<h3 class="wiki-heading">${heading}</h3>`;
+      } else if (section.startsWith('==')) {
+        const heading = section.replace(/=/g, '').trim();
+        html += `<h2 class="wiki-main-heading">${heading}</h2>`;
+      } else if (section.startsWith('*')) {
+        html += `<ul class="wiki-list"><li>${section.replace('*', '').trim()}</li></ul>`;
+      } else if (section.startsWith('{{quote|')) {
+        const quote = section.replace(/{{quote\|(.*?)}}/g, '$1');
+        html += `<blockquote class="wiki-quote">${quote}</blockquote>`;
+      } else if (section.trim().length > 0) {
+        html += `<p class="wiki-paragraph">${section}</p>`;
+      }
+    });
+    
+    return html + '</div>';
+  }
+
+  function formatBookDetails(bookData) {
+    let details = '';
+    if (bookData.publish_date) details += `<p><strong>Publication Date:</strong> ${bookData.publish_date}</p>`;
+    if (bookData.publishers) details += `<p><strong>Publisher:</strong> ${bookData.publishers.join(', ')}</p>`;
+    if (bookData.subjects) details += `<p><strong>Subjects:</strong> ${bookData.subjects.join(', ')}</p>`;
+    if (bookData.links) {
+      details += '<div class="wiki-reference"><strong>References:</strong><ul>';
+      bookData.links.forEach(link => {
+        details += `<li><a href="${link.url}" target="_blank">${link.title}</a></li>`;
+      });
+      details += '</ul></div>';
+    }
+    return details;
+  }
+
+  function closeModal() {
+    document.getElementById('articleModal').classList.add('hidden');
+  }
+
+  function showError(message) {
+    const errorDiv = document.getElementById('error');
+    errorDiv.textContent = message;
+    errorDiv.classList.remove('hidden');
+  }
+  </script>
+</body>
+</html>
