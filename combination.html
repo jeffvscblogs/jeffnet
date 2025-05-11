@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combine Digits</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        input {
+            width: 100px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        #output {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+        img {
+            height: 50%;
+            display: block;
+            margin: auto;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="firstDigit" maxlength="1" placeholder="First digit">
+        <input type="text" id="secondDigit" maxlength="1" placeholder="Second digit">
+        <input type="text" id="output" readonly placeholder="Combined result">
+    </div>
+    <h1>मानव भाई, आप भी ना... ये लो तोहफ़ा!</h1>
+    <img src="https://i.ibb.co/b55Nc40/1000118493-01.jpg" alt="" >
+
+    <script>
+        const firstDigit = document.getElementById('firstDigit');
+        const secondDigit = document.getElementById('secondDigit');
+        const output = document.getElementById('output');
+
+        // Validate input to allow only digits
+        function validateInput(input) {
+            if (input.value && !/^\d$/.test(input.value)) {
+                input.value = '';
+            }
+        }
+
+        // Update output when inputs change
+        function updateOutput() {
+            output.value = firstDigit.value + secondDigit.value;
+        }
+
+        // Event listeners for both input fields
+        firstDigit.addEventListener('input', function() {
+            validateInput(this);
+            updateOutput();
+        });
+
+        secondDigit.addEventListener('input', function() {
+            validateInput(this);
+            updateOutput();
+        });
+    </script>
+</body>
+</html>
